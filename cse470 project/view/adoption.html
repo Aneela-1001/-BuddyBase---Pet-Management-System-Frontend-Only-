@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adopt a Pet</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ccc;
+    }
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 10px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #218838;
+    }
+    #successMessage {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      border-radius: 5px;
+      text-align: center;
+    }
+    #goBackBtn {
+      margin-top: 20px;
+      background-color: #007bff;
+    }
+    #goBackBtn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Adopt a Pet</h2>
+
+  <!-- Adoption Form -->
+  <form id="adoptionForm" onsubmit="handleAdoptionSubmit(event)">
+    <label for="full_name">Your Full Name</label>
+    <input type="text" id="full_name" name="full_name" required />
+
+    <label for="email">Email Address</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="phone">Phone Number</label>
+    <input type="text" id="phone" name="phone" required />
+
+    <label for="pet_id">Pet ID</label>
+    <input type="text" id="pet_id" name="pet_id" required />
+
+    <label for="reason">Why do you want to adopt this pet?</label>
+    <textarea id="reason" name="reason" rows="4" required></textarea>
+
+    <button type="submit">Submit Adoption Request</button>
+  </form>
+
+  <!-- Success Message and Go Back Button -->
+  <div id="successMessage">
+    ✅ Adoption request successful!<br>
+    You will receive further information through your email.
+    <br><br>
+    <button id="goBackBtn" onclick="location.href='index.html'">Go Back to Home</button>
+  </div>
+</div>
+
+<script>
+  function handleAdoptionSubmit(event) {
+    event.preventDefault();
+    document.getElementById("adoptionForm").style.display = "none";
+    document.getElementById("successMessage").style.display = "block";
+  }
+</script>
+
+</body>
+</html>

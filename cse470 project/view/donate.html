@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Donation Page - SB Admin</title>
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <style>
+        .donation-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 50px;
+			color: #6C48C5;
+        }
+
+        .donation-text {
+            flex: 1;
+            min-width: 300px;
+            z-index: 1;
+        }
+
+        .donation-text h3 {
+            font-weight: 600;
+        }
+
+        .donation-container::before {
+            content: ''; /* Creates a pseudo-element */
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 35%; /* Controls the size of the image area */
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 0; /* Places the image behind the content */
+        }
+
+        .donation-options button {
+            margin-bottom: 10px;
+        }
+
+        .donation-options .btn-warning {
+            color: white;
+        }
+
+        .donation-options button {
+            background-color: #A888B5; 
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+    </style>
+</head>
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <a class="navbar-brand ps-3" href="index.php">Buddy Base</a>
+
+
+
+            </div>
+        </form>
+
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav flex-column">
+                        <div class="sb-sidenav-menu-heading text-uppercase small">Account</div>
+                        <?php if (isset($_SESSION['user_id'])): ?>
+                            <a class="nav-link text-white" href="profile.php"><i class="fas fa-user me-2"></i>Profile</a>
+                            <a class="nav-link text-white" href="logout.php"><i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+                        <?php else: ?>
+                            <a class="nav-link text-white" href="login.html"><i class="fas fa-sign-in-alt me-2"></i>Login</a>
+                            <a class="nav-link text-white" href="register.html"><i class="fas fa-user-plus me-2"></i>Register</a>
+                        <?php endif; ?>
+
+                        <div class="sb-sidenav-menu-heading text-uppercase small">Pet Features</div>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-paw me-2"></i>Pet Adoption</a>
+                        <a class="nav-link text-white" href="food.html"><i class="fas fa-bone me-2"></i>Pet Food</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-capsules me-2"></i>Supplements</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-video me-2"></i>Training</a>
+                        <a class="nav-link text-white" href="donate.html"><i class="fas fa-donate me-2"></i>Donation</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-home me-2"></i>Daycare</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-notes-medical me-2"></i>Appointments</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-comments me-2"></i>Vet Chat</a>
+                        <a class="nav-link text-white" href="groom1.html"><i class="fas fa-cut me-2"></i>Grooming</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-chart-line me-2"></i>Activity</a>
+                        <a class="nav-link text-white" href="donation_history.php"><i class="fas fa-exclamation-triangle me-2"></i>Abuse Alerts</a>
+                        <a class="nav-link text-white" href="#"><i class="fas fa-heartbeat me-2"></i>Health</a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer text-white small">
+
+                    <?php endif; ?>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Donate</h1>
+                    <ol class="breadcrumb mb-4"></ol>
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <div class="donation-container">
+                                <div class="donation-text">
+                                    <h3>Make a Monthly Donation</h3>
+                                    <p>Help us rescue, protect, and care for animals in need. Your monthly donation provides food, shelter, medical care, and loving homes for abandoned and abused pets.
+                                    Be their hero—start giving today.</p>
+                                    <div class="donation-options mt-3">
+                                        <button class="btn btn-secondary me-2">$10</button>
+                                        <button class="btn btn-warning me-2 fw-bold">$15</button>
+                                        <button class="btn btn-secondary me-2">$20</button>
+                                        <button class="btn btn-secondary me-2">$25</button>
+                                        <button class="btn btn-secondary me-2">$50</button>
+                                        <button id="otherBtn" class="btn btn-outline-dark">OTHER</button>
+                                    </div>
+
+                                    <div id="customAmountBox" class="mt-3" style="display: none;">
+                                        <input type="number" class="form-control" placeholder="Enter your amount" id="customAmountInput" min="1">
+                                    </div>
+                                </div>
+                                <div class="donation-image">
+                                    <img src="assets/wisp.jpeg" alt="image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script>
+        document.querySelectorAll('.donation-options button').forEach(button => {
+            button.addEventListener('dblclick', () => {
+                let amount;
+
+                if (button.id === 'otherBtn') {
+                    amount = document.getElementById('customAmountInput').value;
+                } else {
+                    amount = button.textContent.replace('$', '');
+                }
+
+                if (!amount || isNaN(amount) || amount <= 0) {
+                    alert("Please enter a valid donation amount.");
+                    return;
+                }
+
+                const formData = new FormData();
+                formData.append('amount', amount);
+
+                fetch('donate.php', {
+                    method: 'POST',
+                    body: formData
+                })
+                .then(res => res.text())
+                .then(response => {
+                    console.log(response);
+                    alert("Donation successful!");
+                })
+                .catch(err => console.log('Error:', err));
+            });
+        });
+
+        document.getElementById('otherBtn').addEventListener('click', () => {
+            document.getElementById('customAmountBox').style.display = 'block';
+        });
+    </script>
+</body>
+</html>

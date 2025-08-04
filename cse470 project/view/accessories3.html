@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pet Supplements & Accessories - Page 3</title>
+  <style>
+    body { font-family: 'Chewy', cursive; margin: 0; padding: 20px; background-color: #fff; color: #000; }
+    .site-title { text-align: center; font-size: 40px; }
+    .cart-icon { position: fixed; top: 20px; right: 30px; font-size: 40px; text-decoration: none; color: #333; }
+    .cart-icon:hover { color: #0077cc; }
+          #cart-count {
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 14px;
+      vertical-align: top;
+      margin-left: 4px;
+    }
+    #search-container { text-align: center; margin: 20px auto; }
+    #search-bar { padding: 10px; width: 300px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc; }
+    #food-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
+    .food-item { border: 1px solid #ccc; padding: 12px; width: 200px; text-align: center; border-radius: 8px; }
+    .food-item img { width: 150px; height: 150px; object-fit: cover; }
+    .action-area button { padding: 8px 12px; margin-top: 8px; background-color: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; }
+    .qty-controls { display: flex; justify-content: center; align-items: center; gap: 10px; margin-top: 10px; }
+    .qty-controls button { background-color: #007bff; color: white; border: none; border-radius: 4px; padding: 6px 10px; font-size: 16px; cursor: pointer; }
+    .qty-controls span { min-width: 20px; display: inline-block; font-size: 16px; }
+    .pagination-container { display: flex; justify-content: center; padding: 20px; margin-top: 40px; }
+    .pagination { list-style: none; display: flex; gap: 10px; padding: 0; }
+    .page-item { padding: 8px 14px; border-radius: 6px; background-color: #f1f5f9; color: #000; cursor: pointer; font-size: 16px; user-select: none; }
+    .page-item a { text-decoration: none; color: inherit; }
+    .page-item.active { background-color: #dbeafe; color: #2563eb; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+  <h1 class="site-title">🐾 Pet Supplements & Accessories 🐾</h1>
+
+  <div id="search-container">
+    <input type="text" id="search-bar" placeholder="Search supplements or accessories...">
+  </div>
+
+  <div id="food-list"></div>
+
+  <footer>
+    <nav class="pagination-container">
+      <ul class="pagination">
+        <li class="page-item"><a href="accessories2.html">&lt;</a></li>
+        <li class="page-item"><a href="accessories1.html">1</a></li>
+        <li class="page-item"><a href="accessories2.html">2</a></li>
+        <li class="page-item active"><span>3</span></li>
+        <li class="page-item"><a href="accessories4.html">&gt;</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+  <script>
+  const allProducts = [
+    // (Page 1)
+    { name: "Flea Repellent Collar", price: 300, image: "assets/flea_collar.jpg" },
+    { name: "Vitamin Boost Drops", price: 350, image: "assets/vitamin_drops.jpg" },
+    { name: "Omega-3 Fish Oil", price: 400, image: "assets/fish_oil.jpg" },
+    { name: "Pet Grooming Brush", price: 220, image: "assets/grooming_brush.jpg" },
+    { name: "Ear Cleaning Wipes", price: 180, image: "assets/ear_wipes.jpg" },
+    { name: "Joint Support Chews", price: 330, image: "assets/joint_chews.jpg" },
+    { name: "Paw Protection Balm", price: 260, image: "assets/paw_balm.jpg" },
+    { name: "Adjustable Harness", price: 450, image: "assets/harness.jpg" },
+    { name: "Travel Water Bottle", price: 280, image: "assets/water_bottle.jpg" },
+    { name: "Cooling Mat", price: 500, image: "assets/cooling_mat.jpg" },
+
+    // (Page 2)
+    { name: "Pet Nail Clipper", price: 250, image: "assets/nail_clipper.jpg" },
+    { name: "Anti-Itch Spray", price: 320, image: "assets/itch_spray.jpg" },
+    { name: "Tear Stain Remover", price: 280, image: "assets/tear_remover.jpg" },
+    { name: "Dog Sunglasses", price: 420, image: "assets/sunglasses.jpg" },
+    { name: "Portable Litter Box", price: 390, image: "assets/litter_box.jpg" },
+    { name: "Pet Toothbrush Set", price: 150, image: "assets/toothbrush.jpg" },
+    { name: "Pet Cologne Spray", price: 230, image: "assets/cologne.jpg" },
+    { name: "Dental Water Additive", price: 340, image: "assets/dental_water.jpg" },
+    { name: "Tick Remover Tool", price: 210, image: "assets/tick_remover.jpg" },
+    { name: "Soft Recovery Cone", price: 460, image: "assets/recovery_cone.jpg" },
+
+    // (Page 3)
+    { name: "Pet Feeding Bowl", price: 260, image: "assets/feeding_bowl.jpg" },
+    { name: "Pet Stain Remover", price: 300, image: "assets/stain_remover.jpg" },
+    { name: "Dog Shoes Set", price: 480, image: "assets/dog_shoes.jpg" },
+    { name: "Pet Blanket", price: 350, image: "assets/pet_blanket.jpg" },
+    { name: "Training Clicker", price: 120, image: "assets/training_clicker.jpg" },
+    { name: "Pet Safety Seatbelt", price: 270, image: "assets/seatbelt.jpg" },
+    { name: "LED Leash Collar", price: 390, image: "assets/led_collar.jpg" },
+    { name: "Soft Pet Carrier", price: 620, image: "assets/pet_carrier.jpg" },
+    { name: "Cooling Vest", price: 550, image: "assets/cooling_vest.jpg" },
+    { name: "Pet Hair Dryer", price: 890, image: "assets/hair_dryer.jpg" },
+
+    // (Page 4)
+    { name: "Pet Cooling Bandana", price: 290, image: "assets/cooling_bandana.jpg" },
+    { name: "Pet Grooming Gloves", price: 210, image: "assets/grooming_gloves.jpg" },
+    { name: "Reflective Pet Vest", price: 430, image: "assets/reflective_vest.jpg" }
+  ];
+
+  const currentPage = 3;
+  const itemsPerPage = currentPage === 4 ? 3 : 10;
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+  function updateCartCount() {
+    document.getElementById('cart-count').textContent = cart.reduce((a, b) => a + b.qty, 0);
+  }
+
+  function renderProducts(list) {
+    const container = document.getElementById('food-list');
+    container.innerHTML = '';
+    list.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'food-item';
+      item.dataset.name = p.name.toLowerCase();
+      item.innerHTML = `
+        <img src="${p.image}" alt="${p.name}">
+        <h3>${p.name}</h3>
+        <p>\u09f3${p.price}</p>
+        <div class="action-area"></div>
+      `;
+      const action = item.querySelector('.action-area');
+      const cartItem = cart.find(i => i.name === p.name);
+      if (cartItem) {
+        action.appendChild(getQtyControls(p.name));
+      } else {
+        const btn = document.createElement('button');
+        btn.textContent = 'Add to Bag';
+        btn.onclick = () => {
+          cart.push({ name: p.name, qty: 1 });
+          localStorage.setItem('cart', JSON.stringify(cart));
+          updateCartCount();
+          action.innerHTML = '';
+          action.appendChild(getQtyControls(p.name));
+        };
+        action.appendChild(btn);
+      }
+      container.appendChild(item);
+    });
+  }
+
+  function getQtyControls(name) {
+    const wrap = document.createElement('div');
+    wrap.className = 'qty-controls';
+    const minus = document.createElement('button'); minus.textContent = '-';
+    const plus = document.createElement('button'); plus.textContent = '+';
+    const qtySpan = document.createElement('span');
+    const item = cart.find(i => i.name === name);
+    qtySpan.textContent = item.qty;
+
+    minus.onclick = () => {
+      item.qty--;
+      if (item.qty <= 0) {
+        const idx = cart.findIndex(i => i.name === name);
+        if (idx !== -1) cart.splice(idx, 1);
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+        renderProducts(getDefaultItems());
+      } else {
+        qtySpan.textContent = item.qty;
+        localStorage.setItem('cart', JSON.stringify(cart));
+        updateCartCount();
+      }
+    };
+
+    plus.onclick = () => {
+      item.qty++;
+      qtySpan.textContent = item.qty;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartCount();
+    };
+
+    wrap.append(minus, qtySpan, plus);
+    return wrap;
+  }
+
+  function getDefaultItems() {
+    const start = (currentPage - 1) * 10;
+    return allProducts.slice(start, start + itemsPerPage);
+  }
+
+  document.getElementById('search-bar').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    if (query === '') {
+      renderProducts(getDefaultItems());
+    } else {
+      const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
+      renderProducts(filtered);
+    }
+  });
+
+  renderProducts(getDefaultItems());
+  updateCartCount();
+</script>
+</body>
+</html>

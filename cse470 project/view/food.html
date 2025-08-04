@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pet Food - Page 1</title>
+  <style>
+        body {
+  background-color: #fff;
+  color: #000;
+  font-family: 'Chewy', cursive;
+  margin: 0;
+  padding: 20px;
+}
+h1, h2, h3 {
+  font-family: 'Chewy', cursive;
+}
+.site-title {
+  text-align: center;
+  font-size: 40px;
+}
+
+
+    .cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .cart-icon:hover {
+      color: #0077cc;
+    }
+
+    #cart-count {
+      background: red;
+      color: white;
+      border-radius: 50%;
+      padding: 2px 6px;
+      font-size: 14px;
+      vertical-align: top;
+      margin-left: 4px;
+    }
+    #food-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Or space-evenly */
+  gap: 20px; /* spacing between items */
+}
+#search-container { text-align: center; margin: 20px auto; }
+
+.food-item {
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  border-radius: 8px;
+  /* REMOVE: display: inline-block; */
+}
+
+
+    .food-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .action-area button {
+      padding: 8px 12px;
+      margin-top: 8px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .qty-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qty-controls button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .qty-controls span {
+      min-width: 20px;
+      display: inline-block;
+      font-size: 16px;
+    }
+
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+
+    .pagination {
+      list-style: none;
+      display: flex;
+      gap: 10px;
+      padding: 0;
+    }
+
+    .page-item {
+      padding: 8px 14px;
+      border-radius: 6px;
+      background-color: #f1f5f9;
+      color: #000;
+      cursor: pointer;
+      font-size: 16px;
+      user-select: none;
+    }
+
+    .page-item a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .page-item.active {
+      background-color: #dbeafe;
+      color: #2563eb;
+      font-weight: bold;
+    }
+    #search-container { text-align: center; margin: 20px auto; }
+    #search-bar { padding: 10px; width: 300px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc; }
+    .page-item.disabled {
+      color: #aaa;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+
+  <h1 class="site-title">🐾 Pet Bites 🐾</h1>
+    <div id="search-container">
+    <input type="text" id="search-bar" placeholder="Search pet foods">
+  </div>
+
+  <div id="food-list">
+  <!-- Beef Meal -->
+  <div class="food-item" data-name="Beef Meal1" data-price="300" data-image="assets/catf1.jpg" data-description="Kitten Starter Bites (Chicken Flavor)
+Specially formulated for kittens aged 1–12 months. Feed dry or moistened with water or milk replacer.">
+    <img src="assets/catf1.jpg" alt="Beef Meal">
+    <h3>Beef Meal</h3>
+    <p>৳300</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <!-- Chicken Delight -->
+  <div class="food-item" data-name="Chicken Delight2" data-price="320" data-image="assets/catf2.jpg" data-description="Adult Cat Crunch – Salmon Delight
+Suitable for adult cats over 1 year. Serve dry with access to fresh water. Ideal for daily feeding.">
+    <img src="assets/catf2.jpg" alt="Chicken Delight">
+    <h3>Chicken Delight</h3>
+    <p>৳320</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <!-- Fish Feast Variants -->
+  <div class="food-item" data-name="Fish Feast3" data-price="280" data-image="assets/catf3.jpg" data-description="Senior Cat Blend – Tuna Mix
+For cats aged 7+. Easy to chew with added joint support. Feed once or twice daily with water.">
+    <img src="assets/catf3.jpg" alt="Fish Feast">
+    <h3>Fish Feast</h3>
+    <p>৳280</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <div class="food-item" data-name="Fish Feast4" data-price="280" data-image="assets/catf4.jpg" data-description="Hairball Control Mix – Chicken & Rice
+Adult formula to reduce hairball formation. Feed as the main diet to cats aged 1+ years.">
+    <img src="assets/catf4.jpg" alt="Fish Feast">
+    <h3>Fish Feast</h3>
+    <p>৳280</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <div class="food-item" data-name="Fish Feast5" data-price="280" data-image="assets/catf5.jpg" data-description="Sensitive Stomach Formula – Turkey
+Best for cats with digestive issues, aged 1–10 years. Serve in small portions 2–3 times daily.">
+    <img src="assets/catf5.jpg" alt="Fish Feast">
+    <h3>Fish Feast</h3>
+    <p>৳280</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <div class="food-item" data-name="Fish Feast6" data-price="280" data-image="assets/catf6.jpg" data-description="Indoor Cat Formula – Whitefish Flavor
+Designed for indoor cats of all ages. Feed 1/4 cup per 5 lbs of body weight twice daily.">
+    <img src="assets/catf6.jpg" alt="Fish Feast">
+    <h3>Fish Feast</h3>
+    <p>৳280</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <!-- Gravy Treat -->
+  <div class="food-item" data-name="Gravy Treat4" data-price="400" data-image="assets/dogf1.jpg" data-description="Puppy Growth Formula – Chicken & Rice
+For puppies aged 4 weeks to 12 months. Feed moistened with warm water 3 times a day.">
+    <img src="assets/dogf1.jpg" alt="Gravy Treat">
+    <h3>Gravy Treat</h3>
+    <p>৳400</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <!-- Puppy Power -->
+  <div class="food-item" data-name="Puppy Power5" data-price="350" data-image="assets/dogf2.jpg" data-description="Adult Dog Kibble – Beef Flavor
+Designed for dogs aged 1–7 years. Serve dry, 2 meals per day with water.">
+    <img src="assets/dogf2.jpg" alt="Puppy Power">
+    <h3>Puppy Power</h3>
+    <p>৳350</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <!-- Mutton Chunks Variants -->
+  <div class="food-item" data-name="Mutton Chunks6" data-price="380" data-image="assets/dogf3.jpg" data-description="Senior Dog Nutrition – Turkey & Brown Rice
+Easy-to-chew, fortified for dogs aged 7+. Feed twice daily.">
+    <img src="assets/dogf3.jpg" alt="Mutton Chunks">
+    <h3>Mutton Chunks</h3>
+    <p>৳380</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+
+  <div class="food-item" data-name="Mutton Chunks7" data-price="380" data-image="assets/dogf4.jpg" data-description="Large Breed Puppy Mix – Lamb & Rice
+Balanced calcium for growing large breeds. Serve 3 times daily up to 18 months of age.">
+    <img src="assets/dogf4.jpg" alt="Mutton Chunks">
+    <h3>Mutton Chunks</h3>
+    <p>৳380</p>
+    <div class="action-area">
+      <button class="add-btn">Add to Bag</button>
+      <button class="details-btn">Details</button>
+    </div>
+  </div>
+</div>
+
+
+
+  <script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = totalItems;
+    }
+
+    function renderQtyControls(parent, quantity) {
+      const actionArea = parent.querySelector(".action-area");
+      actionArea.innerHTML = `
+        <div class="qty-controls">
+          <button class="minus-btn">−</button>
+          <span class="qty">${quantity}</span>
+          <button class="plus-btn">+</button>
+        </div>
+      `;
+
+      actionArea.querySelector(".plus-btn").addEventListener("click", () => {
+        updateQuantity(parent, 1);
+      });
+
+      actionArea.querySelector(".minus-btn").addEventListener("click", () => {
+        updateQuantity(parent, -1);
+      });
+    }
+
+    function updateQuantity(parent, change) {
+      const name = parent.dataset.name;
+      let cart = getCart();
+      const index = cart.findIndex(item => item.name === name);
+
+      if (index !== -1) {
+        cart[index].quantity += change;
+
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+          parent.querySelector(".action-area").innerHTML = `<button class="add-btn">Add to Bag</button>`;
+          parent.querySelector(".add-btn").addEventListener("click", () => addToCart(parent));
+        } else {
+          renderQtyControls(parent, cart[index].quantity);
+        }
+
+        saveCart(cart);
+        updateCartCount();
+      }
+    }
+
+    function addToCart(parent) {
+      const name = parent.dataset.name;
+      const price = parseInt(parent.dataset.price);
+      const image = parent.dataset.image;
+
+      let cart = getCart();
+      const index = cart.findIndex(item => item.name === name);
+
+      if (index === -1) {
+        cart.push({ name, price, image, quantity: 1 });
+      } else {
+        cart[index].quantity += 1;
+      }
+
+      saveCart(cart);
+      renderQtyControls(parent, cart[index === -1 ? cart.length - 1 : index].quantity);
+      updateCartCount();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".add-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const parent = btn.closest(".food-item");
+          addToCart(parent);
+        });
+      });
+
+      const cart = getCart();
+      document.querySelectorAll(".food-item").forEach(item => {
+        const product = cart.find(p => p.name === item.dataset.name);
+        if (product) {
+          renderQtyControls(item, product.quantity);
+        }
+      });
+
+      updateCartCount();
+    });
+  </script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Function to open the modal with the provided data
+    function openModal(data) {
+      document.getElementById('modal-img').src = data.image;
+      document.getElementById('modal-name').textContent = data.name;
+      document.getElementById('modal-price').textContent = "৳" + data.price;
+      document.getElementById('modal-description').textContent = data.description;
+      document.getElementById('details-modal').style.display = "flex";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById("details-modal").style.display = "none";
+    }
+
+    // Attach close event
+    document.getElementById("close-modal").addEventListener("click", closeModal);
+
+    // Search bar input handler
+    document.getElementById('search-bar').addEventListener('input', function () {
+      const query = this.value.toLowerCase();
+      if (query === '') {
+        renderProducts(getDefaultItems());
+      } else {
+        const filtered = allProducts.filter(p => p.name.toLowerCase().includes(query));
+        renderProducts(filtered);
+      }
+    });
+
+    // Details button handlers
+    document.querySelectorAll(".details-btn").forEach(button => {
+      button.addEventListener("click", event => {
+        const parent = event.target.closest(".food-item");
+        if (parent) {
+          const data = {
+            name: parent.dataset.name,
+            price: parent.dataset.price,
+            image: parent.dataset.image,
+            description: parent.dataset.description || "No description available."
+          };
+          openModal(data);
+        }
+      });
+    });
+  });
+</script>
+<script>
+  document.getElementById('search-bar').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    const items = document.querySelectorAll('.food-item');
+
+    items.forEach(item => {
+      const name = item.dataset.name.toLowerCase();
+      if (name.includes(query)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+
+
+
+  <div id="details-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+  background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center;">
+  <div style="background: white; padding: 20px; border-radius: 10px; width: 300px; position: relative;">
+    <span id="close-modal" style="position: absolute; top: 8px; right: 12px; cursor: pointer; font-size: 20px;">×</span>
+    <img id="modal-img" src="" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
+    <h3 id="modal-name"></h3>
+    <p id="modal-price"></p>
+    <p id="modal-description"></p>
+  </div>
+</div>
+
+
+  <footer>
+    <nav class="pagination-container">
+      <ul class="pagination">
+        <li class="page-item disabled">&lt;</li>
+        <li class="page-item active"><span>1</span></li>
+        <li class="page-item"><a href="page2.html">2</a></li>
+        <li class="page-item"><a href="page3.html">3</a></li>
+        <li class="page-item"><a href="page2.html">&gt;</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+</body>
+</html>

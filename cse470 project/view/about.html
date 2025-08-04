@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Buddy Base</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+    }
+
+    .about-container {
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .image-wrapper {
+      position: relative;
+      display: inline-block;
+    }
+
+    .image-wrapper img {
+      width: 100%;
+      max-width: 600px;
+      height: auto;
+      border-radius: 10px;
+    }
+
+    .arrow-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0, 0, 0, 0.4);
+      color: white;
+      border: none;
+      font-size: 24px;
+      padding: 8px 14px;
+      cursor: pointer;
+      border-radius: 50%;
+      user-select: none;
+    }
+
+    .arrow-btn:hover {
+      background-color: rgba(0, 0, 0, 0.6);
+    }
+
+    .arrow-left {
+      left: -30px;
+    }
+
+    .arrow-right {
+      right: -30px;
+    }
+
+    .about-text {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #333;
+      line-height: 1.7;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="about-container">
+    <div class="image-wrapper">
+      <button class="arrow-btn arrow-left" onclick="changeImage(-1)">&#10094;</button>
+      <img id="petImage" src="assets/about.png" alt="Pet Image" />
+      
+
+      <button class="arrow-btn arrow-right" onclick="changeImage(1)">&#10095;</button>
+    </div>
+
+    <div class="about-text">
+      <h2>About Buddy Base 🐾</h2>
+      <p>
+        At Buddy Base, we are dedicated to creating a loving and efficient pet management ecosystem.
+         Whether you're adopting a furry friend, scheduling a vet appointment, buying food or supplements, 
+         or simply tracking your pet’s health — we provide everything under one roof. 
+         Our platform is designed to connect pet owners, veterinarians, and caregivers in a smart, secure, and user-friendly environment.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    const images = [
+      'assets/pet1.jpg',
+      'assets/TakingCare.jpg',
+      'assets/pet3.jpg',
+      'assets/about.png'
+    ];
+    let currentIndex = 0;
+  
+    function changeImage(direction) {
+      currentIndex += direction;
+      if (currentIndex < 0) currentIndex = images.length - 1;
+      if (currentIndex >= images.length) currentIndex = 0;
+      document.getElementById('petImage').src = images[currentIndex];
+    }
+  </script>
+  
+
+</body>
+</html>
+

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Checkout - Buddy Base</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9f9f9;
+    }
+    .checkout-container {
+      max-width: 960px;
+      margin: 50px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    }
+    .checkout-title {
+      border-bottom: 2px solid #dee2e6;
+      margin-bottom: 25px;
+    }
+    .summary-box {
+      background-color: #f1f1f1;
+      padding: 20px;
+      border-radius: 10px;
+    }
+    .summary-box h6 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 10px;
+    }
+    .btn-place-order {
+      background-color: #007bff;
+      color: white;
+    }
+    .btn-place-order:hover {
+      background-color: #0056b3;
+    }
+    .form-control:disabled {
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="checkout-container">
+    <h2 class="checkout-title"><i class="fas fa-credit-card me-2"></i>Checkout</h2>
+    
+    <div class="row">
+      <!-- Billing Details -->
+      <div class="col-md-7">
+        <h5>Billing Details</h5>
+        <form id="checkout-form">
+          <div class="mb-3">
+            <label for="fullName" class="form-label">Full Name</label>
+            <input type="text" class="form-control" id="fullName" required />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email Address</label>
+            <input type="email" class="form-control" id="email" required />
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone Number</label>
+            <input type="tel" class="form-control" id="phone" required />
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Street Address</label>
+            <input type="text" class="form-control" id="address" required />
+          </div>
+          <div class="mb-3 row">
+            <div class="col-md-6">
+              <label for="city" class="form-label">City</label>
+              <input type="text" class="form-control" id="city" required />
+            </div>
+            <div class="col-md-6">
+              <label for="zip" class="form-label">ZIP Code</label>
+              <input type="text" class="form-control" id="zip" required />
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="col-md-5">
+        <div class="summary-box">
+          <h6>Order Summary</h6>
+          <ul class="list-unstyled mb-3">
+            <li class="d-flex justify-content-between">
+              <span>Comfy Dog Bed x1</span>
+              <strong>$35.00</strong>
+            </li>
+            <li class="d-flex justify-content-between">
+              <span>Pet Hair Remover x2</span>
+              <strong>$40.00</strong>
+            </li>
+            <hr />
+            <li class="d-flex justify-content-between">
+              <span>Subtotal</span>
+              <strong>$75.00</strong>
+            </li>
+            <li class="d-flex justify-content-between">
+              <span>Shipping</span>
+              <strong>$5.00</strong>
+            </li>
+            <li class="d-flex justify-content-between text-primary">
+              <span>Total</span>
+              <strong>$80.00</strong>
+            </li>
+          </ul>
+
+          <button class="btn btn-place-order w-100 mt-3">Place Order</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and Order Logic -->
+  <script>
+    document.querySelector('.btn-place-order').addEventListener('click', function(event) {
+      event.preventDefault(); // Prevent default form behavior
+
+      const fullNameInput = document.getElementById('fullName');
+      const billingName = fullNameInput.value.trim();
+
+      if (!billingName) {
+        alert('Please enter your full name.');
+        fullNameInput.focus();
+        return;
+      }
+
+      // Store the name to localStorage for tracking
+      localStorage.setItem('billingName', billingName.toLowerCase());
+
+      // Clear the cart from localStorage
+      localStorage.removeItem('cart');
+
+      // Show confirmation message
+      const container = document.querySelector('.checkout-container');
+      container.innerHTML = `
+        <div class="text-center py-5">
+          <i class="fas fa-check-circle fa-4x text-success mb-3"></i>
+          <h2>Thank you for your order!</h2>
+          <p class="lead">We've received your request and will process it shortly.</p>
+          <a href="index.html" class="btn btn-primary mt-3">Back to Home</a>
+          <a href="track.html" class="btn btn-primary mt-3">
+            <i class="fas fa-shipping-fast me-2"></i>Track Your Parcel
+          </a>
+        </div>
+      `;
+    });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

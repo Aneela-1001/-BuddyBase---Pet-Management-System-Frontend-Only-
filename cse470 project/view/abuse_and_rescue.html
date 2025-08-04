@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abuse and Rescue</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #eef2f3;
+      display: flex;
+    }
+    .form-container {
+      width: 320px;
+      background: #fff;
+      padding: 20px;
+      border-right: 1px solid #ddd;
+      height: 100vh;
+      position: fixed;
+      overflow-y: auto;
+    }
+    .form-container h1 {
+      font-size: 20px;
+      text-align: center;
+      color: #2c3e50;
+    }
+    .form-container label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    .form-container input,
+    .form-container select,
+    .form-container textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .form-container button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .form-container button:hover {
+      background-color: #219150;
+    }
+    .posts-container {
+      margin-left: 340px;
+      padding: 30px 40px;
+      flex: 1;
+      height: 100vh;
+      overflow-y: auto;
+    }
+    .report-card {
+      background: #fafafa;
+      border-left: 5px solid #3498db;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+    .report-card img {
+      max-width: 180px;
+      height: auto;
+      margin-top: 10px;
+      border-radius: 4px;
+    }
+    .report-card .actions {
+      margin-top: 10px;
+    }
+    .report-card .actions button {
+      margin-right: 10px;
+      padding: 6px 12px;
+      border: none;
+      border-radius: 4px;
+      background: #2980b9;
+      color: #fff;
+      cursor: pointer;
+    }
+    .report-card .actions button:hover {
+      background: #1c5980;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h1>Report Abuse / Rescue</h1>
+    <form action="abuse_submit.php" method="POST" enctype="multipart/form-data">
+      <label for="reporter_name">Your Name:</label>
+      <input type="text" name="reporter_name" required>
+
+      <label for="contact_email">Phone Number:</label>
+      <input type="text" name="contact_email" required>
+
+      <label for="action_type">Action Type:</label>
+      <select name="action_type" required>
+        <option value="abuse">Animal is abused by someone</option>
+        <option value="injury">Animal is injured</option>
+      </select>
+
+      <label for="location">Location:</label>
+      <input type="text" name="location" required>
+
+      <label for="description">Description:</label>
+      <textarea name="description" rows="4" required></textarea>
+
+      <label for="image">Upload Image:</label>
+      <input type="file" name="image" accept="image/*">
+
+      <button type="submit">Submit Report</button>
+    </form>
+  </div>
+
+  <div class="posts-container">
+    <div id="approved-posts"></div>
+  </div>
+
+  <script>
+function markAsRescued(button, card, postId) {
+  fetch("mark_rescued.php", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `id=${postId}`
+  })
+  .then(res => res.text())
+  .then(() => {
+    button.remove();
+    const rescuedMsg = document.createElement("p");
+    rescuedMsg.style.color = "green";
+    rescuedMsg.textContent = "✅ Animal is rescued.";
+    card.appendChild(rescuedMsg);
+  });
+}
+
+
+    function loadApprovedPosts() {
+      fetch("fetch_approved_posts.php")
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById("approved-posts");
+          container.innerHTML = "";
+          data.forEach(post => {
+            const card = document.createElement("div");
+            card.className = "report-card";
+            card.innerHTML = `
+              <strong>${post.reporter_name}</strong> reported from <strong>${post.location}</strong><br>
+              <strong>Phone:</strong> ${post.contact_email}<br>
+              <em>Type:</em> ${post.action_type || 'Not specified'}<br>
+              <p>${post.description}</p>
+              ${post.image ? `<img src="${post.image}" alt="report image">` : ""}
+            `;
+            const btnBox = document.createElement("div");
+            btnBox.className = "actions";
+            const rescuedBtn = document.createElement("button");
+            rescuedBtn.textContent = "Rescued";
+            rescuedBtn.onclick = () => markAsRescued(rescuedBtn, card, post.id);
+            btnBox.appendChild(rescuedBtn);
+            card.appendChild(btnBox);
+            container.appendChild(card);
+          });
+        });
+    }
+
+    loadApprovedPosts();
+  </script>
+</body>
+</html>

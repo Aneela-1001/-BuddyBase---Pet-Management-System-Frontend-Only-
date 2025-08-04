@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pet Food - Page 2</title>
+  <style>
+            body {
+  background-color: #fff;
+  color: #000;
+  font-family: 'Chewy', cursive;
+  margin: 0;
+  padding: 20px;
+}
+h1, h2, h3 {
+  font-family: 'Chewy', cursive;
+}
+    .cart-icon {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      font-size: 40px;
+      text-decoration: none;
+      color: #333;
+    }
+    .site-title {
+  text-align: center;
+  font-size: 40px;
+}
+
+    .cart-icon:hover {
+      color: #0077cc;
+    }
+    #cart-count {
+  background: red;
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 14px;
+  vertical-align: top;
+  margin-left: 4px;
+}
+#food-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Or space-evenly */
+  gap: 20px; /* spacing between items */
+}
+
+
+.food-item {
+  border: 1px solid #ccc;
+  padding: 12px;
+  margin: 10px;
+  width: 200px;
+  text-align: center;
+  border-radius: 8px;
+  /* REMOVE: display: inline-block; */
+}
+
+
+    .food-item img {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+    }
+
+    .action-area button {
+      padding: 8px 12px;
+      margin-top: 8px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .qty-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .qty-controls button {
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 6px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .qty-controls span {
+      min-width: 20px;
+      display: inline-block;
+      font-size: 16px;
+    }
+    .pagination-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+  margin-top: 40px;
+}
+
+.pagination {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+  padding: 0;
+}
+
+.page-item {
+  padding: 8px 14px;
+  border-radius: 6px;
+  background-color: #f1f5f9;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  user-select: none;
+}
+
+.page-item a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.page-item.active {
+  background-color: #dbeafe;
+  color: #2563eb;
+  font-weight: bold;
+}
+ #search-container { text-align: center; margin: 20px auto; }
+    #search-bar { padding: 10px; width: 300px; font-size: 16px; border-radius: 6px; border: 1px solid #ccc; }
+.page-item.disabled {
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+
+  </style>
+</head>
+<body>
+
+    <a href="cart.html" class="cart-icon">🛒 <span id="cart-count">0</span></a>
+
+
+    <h1 class="site-title">🐾 Pet Bites 🐾</h1>
+    <div id="search-container">
+    <input type="text" id="search-bar" placeholder="Search pet foods">
+  </div>
+
+  
+
+  <div id="food-list">
+    <div class="food-item" data-name="Tuna & Rice Delight8" data-price="450" data-image="assets/catf8.jpg" data-description="Urinary Care Formula – Tuna & Cranberry
+Supports urinary health in adult cats. Serve as daily dry food with water available.">
+        <img src="assets/catf8.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+
+    <div class="food-item" data-name="Tuna & Rice Delight7" data-price="450" data-image="assets/catf7.jpg" data-description="Weight Control Formula – Chicken
+For overweight cats aged 2+. Low calorie, high fiber. Feed according to vet guidance.">
+      <img src="assets/catf7.jpg" alt="Tuna & Rice Delight">
+      <h3>Tuna & Rice Delight</h3>
+      <p>৳450</p>
+      <div class="action-area">
+        <button class="add-btn">Add to Bag</button>
+        <button class="details-btn">Details</button>
+      </div>
+    </div>
+
+    <div class="food-item" data-name="Tuna & Rice Delight6" data-price="450" data-image="assets/catf9.jpg" data-description="Kitten Milk Replacer Powder
+Ideal for orphaned kittens under 8 weeks. Mix with warm water and feed with bottle or syringe.">
+        <img src="assets/catf9.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight5" data-price="450" data-image="assets/catf10.jpg" data-description="Grain-Free Gourmet – Duck & Pea
+All-natural, grain-free recipe for cats aged 6 months and above. Serve dry or moistened.">
+        <img src="assets/catf10.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight4" data-price="450" data-image="assets/dogf5.jpg" data-description="Digestive Support – Chicken & Pumpkin
+Gentle on stomachs. Suitable for all breeds over 6 months. Feed as needed.">
+        <img src="assets/dogf5.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight4" data-price="450" data-image="assets/dogf6.jpg" data-description="Puppy Milk Replacer Powder
+For puppies under 8 weeks. Mix with warm water and feed every 2–3 hours.">
+        <img src="assets/dogf6.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight4" data-price="450" data-image="assets/dogf7.jpg" data-description="Sensitive Skin & Coat – Salmon & Oatmeal
+Supports coat health for dogs 6 months+. Feed daily with access to water.">
+        <img src="assets/dogf7.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight3" data-price="450" data-image="assets/dogf8.jpg" data-description="Weight Management – Turkey Recipe
+Low-calorie formula for adult dogs with obesity. Feed reduced amounts with vet advice.">
+        <img src="assets/dogf8.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight2" data-price="450" data-image="assets/dogf9.jpg" data-description="Grain-Free Wilderness Formula – Bison & Sweet Potato
+For dogs over 1 year. Ideal for allergies. Feed per weight chart.">
+        <img src="assets/dogf9.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      <div class="food-item" data-name="Tuna & Rice Delight" data-price="450" data-image="assets/dogf10.jpg" data-description="Small Breed Adult Bites – Chicken
+Mini kibble for dogs under 25 lbs, aged 1–8 years. Serve 1–2 cups daily.">
+        <img src="assets/dogf10.jpg" alt="Tuna & Rice Delight">
+        <h3>Tuna & Rice Delight</h3>
+        <p>৳450</p>
+        <div class="action-area">
+          <button class="add-btn">Add to Bag</button>
+          <button class="details-btn">Details</button>
+        </div>
+      </div>
+      
+ 
+  </div>
+
+<script>
+    function getCart() {
+      return JSON.parse(localStorage.getItem('cart')) || [];
+    }
+
+    function saveCart(cart) {
+      localStorage.setItem('cart', JSON.stringify(cart));
+    }
+
+    function updateCartCount() {
+      const cart = getCart();
+      const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+      document.getElementById('cart-count').textContent = totalItems;
+    }
+
+    function renderQtyControls(parent, quantity) {
+      const actionArea = parent.querySelector(".action-area");
+      actionArea.innerHTML = `
+        <div class="qty-controls">
+          <button class="minus-btn">−</button>
+          <span class="qty">${quantity}</span>
+          <button class="plus-btn">+</button>
+        </div>
+      `;
+
+      actionArea.querySelector(".plus-btn").addEventListener("click", () => {
+        updateQuantity(parent, 1);
+      });
+
+      actionArea.querySelector(".minus-btn").addEventListener("click", () => {
+        updateQuantity(parent, -1);
+      });
+    }
+
+    function updateQuantity(parent, change) {
+      const name = parent.dataset.name;
+      let cart = getCart();
+      const index = cart.findIndex(item => item.name === name);
+
+      if (index !== -1) {
+        cart[index].quantity += change;
+
+        if (cart[index].quantity <= 0) {
+          cart.splice(index, 1);
+          parent.querySelector(".action-area").innerHTML = `<button class="add-btn">Add to Bag</button>`;
+          parent.querySelector(".add-btn").addEventListener("click", () => addToCart(parent));
+        } else {
+          renderQtyControls(parent, cart[index].quantity);
+        }
+
+        saveCart(cart);
+        updateCartCount();
+      }
+    }
+
+    function addToCart(parent) {
+      const name = parent.dataset.name;
+      const price = parseInt(parent.dataset.price);
+      const image = parent.dataset.image;
+
+      let cart = getCart();
+      const index = cart.findIndex(item => item.name === name);
+
+      if (index === -1) {
+        cart.push({ name, price, image, quantity: 1 });
+      } else {
+        cart[index].quantity += 1;
+      }
+
+      saveCart(cart);
+      renderQtyControls(parent, cart[index === -1 ? cart.length - 1 : index].quantity);
+      updateCartCount();
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      document.querySelectorAll(".add-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const parent = btn.closest(".food-item");
+          addToCart(parent);
+        });
+      });
+
+      const cart = getCart();
+      document.querySelectorAll(".food-item").forEach(item => {
+        const product = cart.find(p => p.name === item.dataset.name);
+        if (product) {
+          renderQtyControls(item, product.quantity);
+        }
+      });
+
+      updateCartCount();
+    });
+  </script>
+  <script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Function to open the modal with the provided data
+    function openModal(data) {
+      document.getElementById('modal-img').src = data.image;
+      document.getElementById('modal-name').textContent = data.name;
+      document.getElementById('modal-price').textContent = "৳" + data.price;
+      document.getElementById('modal-description').textContent = data.description;
+      document.getElementById('details-modal').style.display = "flex";
+    }
+
+    // Function to close the modal
+    function closeModal() {
+      document.getElementById("details-modal").style.display = "none";
+    }
+
+    // Add event listener to the close button
+    document.getElementById("close-modal").addEventListener("click", closeModal);
+
+    // Use event delegation to handle clicks on "Details" buttons
+    document.querySelectorAll(".details-btn").forEach(button => {
+      button.addEventListener("click", event => {
+        const parent = event.target.closest(".food-item");
+        if (parent) {
+          const data = {
+            name: parent.dataset.name,
+            price: parent.dataset.price,
+            image: parent.dataset.image,
+            description: parent.dataset.description || "No description available."
+          };
+          openModal(data);
+        }
+      });
+    });
+  });
+</script>
+<script>
+  document.getElementById('search-bar').addEventListener('input', function () {
+    const query = this.value.toLowerCase();
+    const items = document.querySelectorAll('.food-item');
+
+    items.forEach(item => {
+      const name = item.dataset.name.toLowerCase();
+      if (name.includes(query)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+</script>
+   <div id="details-modal" style="display:none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+  background: rgba(0,0,0,0.6); z-index: 999; align-items: center; justify-content: center;">
+  <div style="background: white; padding: 20px; border-radius: 10px; width: 300px; position: relative;">
+    <span id="close-modal" style="position: absolute; top: 8px; right: 12px; cursor: pointer; font-size: 20px;">×</span>
+    <img id="modal-img" src="" alt="" style="width: 100%; height: 200px; object-fit: cover; border-radius: 6px;">
+    <h3 id="modal-name"></h3>
+    <p id="modal-price"></p>
+    <p id="modal-description"></p>
+  </div>
+</div>
+  <footer>
+    <nav class="pagination-container">
+      <ul class="pagination">
+        <li class="page-item"><a href="food.html">&lt;</a></li>
+        <li class="page-item"><a href="food.html">1</a></li>
+        <li class="page-item active"><span>2</span></li>
+        <li class="page-item"><a href="page3.html">3</a></li>
+        <li class="page-item"><a href="page3.html">&gt;</a></li>
+      </ul>
+    </nav>
+  </footer>
+
+</body>
+</html>

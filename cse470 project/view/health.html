@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Health Update</title>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: linear-gradient(to right, #f0f2f5, #e4ecf7); }
+    .container { max-width: 750px; margin: 30px auto; padding: 25px; background-color: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    h1 { text-align: center; color: #2c3e50; font-size: 30px; margin-bottom: 25px; }
+    .filter-bar { margin-bottom: 20px; text-align: center; }
+    .filter-bar select { padding: 10px; font-size: 15px; border-radius: 6px; border: 1px solid #bbb; }
+    .health-list { list-style: none; padding: 0; margin-top: 20px; }
+    .health-item { padding: 12px 16px; margin-bottom: 12px; background-color: #fdfdfd; border-left: 4px solid #3498db; border-radius: 8px; font-size: 15px; position: relative; box-shadow: 0 1px 4px rgba(0,0,0,0.04); }
+    .health-item:hover { background-color: #f2faff; }
+    .health-time { color: #555; font-size: 0.85em; margin: 6px 0; display: block; }
+    .health-notes { color: #333; font-style: italic; font-size: 0.9em; margin-top: 5px; }
+    .delete-btn { padding: 6px 12px; font-size: 13px; border: none; border-radius: 4px; background-color: #e74c3c; color: #fff; cursor: pointer; }
+    .delete-btn:hover { background-color: #c0392b; }
+    .log-form { margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; }
+    .log-form h2 { margin-top: 0; font-size: 22px; color: #2c3e50; }
+    .log-form label { display: block; margin-top: 12px; font-weight: 600; font-size: 14px; }
+    .log-form input, .log-form select, .log-form textarea {
+      width: 100%; padding: 9px; border: 1px solid #ccc; border-radius: 5px; box-sizing: border-box; font-size: 14px;
+    }
+    .log-form button {
+      margin-top: 15px; padding: 10px 20px; background-color: #27ae60; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 15px;
+    }
+    .log-form button:hover { background-color: #1e8449; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pet Health Update</h1>
+
+    <div class="filter-bar">
+      <select id="health-filter">
+        <option value="all">All Health Records</option>
+        <option value="weight">Weight Logs</option>
+        <option value="vaccination">Vaccinations</option>
+        <option value="symptom">Symptoms</option>
+        <option value="pet">By Pet</option>
+      </select>
+    </div>
+
+    <ul class="health-list" id="health-records"></ul>
+
+    <div class="log-form">
+      <h2>Log Health Record</h2>
+      <form id="log-health-form">
+        <label for="pet-name">Pet Name</label>
+        <input type="text" id="pet-name" name="pet_name" required placeholder="Enter Pet Name">
+
+        <label for="record-type">Record Type</label>
+        <select id="record-type" name="record_type" required>
+          <option value="weight">Weight</option>
+          <option value="vaccination">Vaccination</option>
+          <option value="symptom">Symptom</option>
+        </select>
+
+        <label for="value">Value/Description</label>
+        <input type="text" id="value" name="value" placeholder="E.g., 25 kg, Limping">
+
+        <label for="record-date">Date</label>
+        <input type="date" id="record-date" name="record_date" required>
+
+        <label for="record-time">Time</label>
+        <input type="time" id="record-time" name="record_time" required>
+
+        <label for="notes">Notes</label>
+        <textarea id="notes" name="notes" rows="3" placeholder="Add any additional notes"></textarea>
+
+        <button type="submit">Log Health Record</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function capitalize(str) {
+      return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function loadRecords() {
+      fetch("fetch_health.php")
+        .then(res => res.json())
+        .then(data => {
+          const container = document.getElementById("health-records");
+          container.innerHTML = "";
+          data.forEach(item => {
+            const li = document.createElement("li");
+            li.className = "health-item";
+
+            let label = item.type === 'vaccination' ? `Vaccination scheduled for ${item.pet_name}` :
+                         item.type === 'weight' ? `Last weight check of ${item.pet_name}` :
+                         `Symptoms observed for ${item.pet_name}`;
+
+            let note = item.notes ? `<div class='health-notes'>Note: ${item.notes}</div>` : "";
+
+            li.innerHTML = `
+              <div><strong>${label}:</strong> ${item.value}</div>
+              <div class="health-time">${item.record_date} ${item.record_time}</div>
+              ${note}
+              <div class="health-actions">
+                <button class="delete-btn" onclick="deleteRecord('${item.id}', '${item.type}')">Delete</button>
+              </div>`;
+            container.appendChild(li);
+          });
+        });
+    }
+
+    function deleteRecord(id, type) {
+      if (confirm("Are you sure you want to delete this health record?")) {
+        fetch("delete_health.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: `id=${id}&type=${type}`
+        })
+        .then(res => res.text())
+        .then(() => loadRecords());
+      }
+    }
+
+    document.getElementById("record-type").addEventListener("change", function () {
+      const valueField = document.getElementById("value");
+      const dateField = document.getElementById("record-date");
+      const today = new Date().toISOString().split('T')[0];
+
+      if (this.value === "vaccination") {
+        valueField.value = "";
+        valueField.disabled = true;
+        valueField.placeholder = "Not needed for vaccinations";
+        dateField.min = today;
+        dateField.removeAttribute("max");
+      } else {
+        valueField.disabled = false;
+        valueField.placeholder = "E.g., 25 kg, Limping";
+        dateField.removeAttribute("min");
+        dateField.max = today;
+      }
+    });
+
+    document.getElementById("log-health-form").addEventListener("submit", function (event) {
+      event.preventDefault();
+      const formData = new FormData(this);
+
+      fetch("log_health.php", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.text())
+      .then(() => {
+        alert("Health record logged successfully!");
+        this.reset();
+        document.getElementById("value").disabled = false;
+        document.getElementById("value").placeholder = "E.g., 25 kg, Limping";
+        loadRecords();
+      })
+      .catch(err => {
+        console.error("Error logging record:", err);
+        alert("Failed to log health record.");
+      });
+    });
+
+    document.getElementById("health-filter").addEventListener("change", function () {
+      alert("Filtering health records by: " + this.value);
+    });
+
+    loadRecords();
+  </script>
+</body>
+</html>
